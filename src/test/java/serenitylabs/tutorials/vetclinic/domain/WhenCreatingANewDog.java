@@ -14,9 +14,23 @@ public class WhenCreatingANewDog {
 
         LocalDateTime dateOfBirth = LocalDateTime.now();
 
-        Dog fido = new Dog("Fido", "Poodle", dateOfBirth);
+        Dog fido = Dog.called("Fido")
+                      .ofBreed("Poodle")
+                      .bornOn(dateOfBirth);
+
         assertThat(fido.getName(), is("Fido"));
         assertThat(fido.getBreed(), is("Poodle"));
         assertThat(fido.getDateOfBirth(), is(dateOfBirth));
+    }
+
+    @Test
+    public void it_should_have_an_optional_favourite_food() {
+
+        LocalDateTime dateOfBirth = LocalDateTime.now();
+
+        Dog fido = new Dog("Fido", "Poodle", dateOfBirth, "Pizza");
+        assertThat(fido.getFavouriteFood(), is("Pizza"));
+
+
     }
 }
