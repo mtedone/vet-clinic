@@ -16,21 +16,16 @@ public class WhenCreatingANewDog {
 
         Dog fido = Dog.called("Fido")
                       .ofBreed("Poodle")
+                      .ofColour("Black")
+                      .withFavouriteFoodOf("Pizza")
                       .bornOn(dateOfBirth);
 
         assertThat(fido.getName(), is("Fido"));
         assertThat(fido.getBreed(), is("Poodle"));
-        assertThat(fido.getDateOfBirth(), is(dateOfBirth));
-    }
-
-    @Test
-    public void it_should_have_an_optional_favourite_food() {
-
-        LocalDateTime dateOfBirth = LocalDateTime.now();
-
-        Dog fido = new Dog("Fido", "Poodle", dateOfBirth, "Pizza");
         assertThat(fido.getFavouriteFood(), is("Pizza"));
-
-
+        assertThat(fido.getDateOfBirth(), is(dateOfBirth));
+        assertThat(fido.getColour(), is("Black"));
     }
+
+
 }
