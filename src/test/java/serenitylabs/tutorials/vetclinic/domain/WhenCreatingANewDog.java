@@ -10,15 +10,31 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class WhenCreatingANewDog {
 
     @Test
-    public void itShoudHaveAName() throws Exception {
+    public void itShoudBeALargeDog() throws Exception {
 
         LocalDateTime dateOfBirth = LocalDateTime.now();
 
-        Dog fido = Dog.called("Fido")
-                      .ofBreed("Poodle")
+        Dog fido = DogBuilder.aLargeDog().called("Fido")
                       .ofColour("Black")
                       .withFavouriteFoodOf("Pizza")
                       .bornOn(dateOfBirth);
+
+        assertThat(fido.getName(), is("Fido"));
+        assertThat(fido.getBreed(), is("Labrador"));
+        assertThat(fido.getFavouriteFood(), is("Pizza"));
+        assertThat(fido.getDateOfBirth(), is(dateOfBirth));
+        assertThat(fido.getColour(), is("Black"));
+    }
+
+    @Test
+    public void itShoudBeASmallDog() throws Exception {
+
+        LocalDateTime dateOfBirth = LocalDateTime.now();
+
+        Dog fido = DogBuilder.aSmallDog().called("Fido")
+                .ofColour("Black")
+                .withFavouriteFoodOf("Pizza")
+                .bornOn(dateOfBirth);
 
         assertThat(fido.getName(), is("Fido"));
         assertThat(fido.getBreed(), is("Poodle"));
