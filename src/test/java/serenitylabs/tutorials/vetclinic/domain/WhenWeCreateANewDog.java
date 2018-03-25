@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 
 public class WhenWeCreateANewDog {
 
@@ -14,7 +15,7 @@ public class WhenWeCreateANewDog {
 
         Assert.assertEquals("Fido",fido.getName());
         Assert.assertEquals("Labrador", fido.getBreed());
-        Assert.assertEquals("Black", fido.getColour());
+        Assert.assertEquals("Black", fido.getColours().get(0));
     }
 
     @Test
@@ -26,5 +27,11 @@ public class WhenWeCreateANewDog {
         assertThat(fido.toString(), startsWith("Fido"));
         assertThat(fido.toString(), endsWith("labrador"));
         assertThat(fido.toString(), containsString("black"));
+    }
+
+    @Test
+    public void a_dog_can_have_several_colours() {
+        Dog fido = Dog.called("Fido").ofBreed("Labrador").andOfColour("Black", "White");
+        assertThat(fido.getColours(), contains("Black", "White"));
     }
 }
