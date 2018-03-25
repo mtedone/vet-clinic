@@ -33,5 +33,7 @@ public class WhenWeCreateANewDog {
     public void a_dog_can_have_several_colours() {
         Dog fido = Dog.called("Fido").ofBreed("Labrador").andOfColour("Black", "White");
         assertThat(fido.getColours(), contains("Black", "White"));
+        assertThat(fido.getColours(), hasItem("Black"));
+        assertThat(fido.getColours(), not(hasItem("Red")));
     }
 }
