@@ -45,4 +45,10 @@ public class Dog {
             return new Dog(name, breed, colour);
         }
     }
+
+    @Override
+    public String toString() {
+        return name + " the " + (colour + " " + breed).toLowerCase();
+
+    }
 }
