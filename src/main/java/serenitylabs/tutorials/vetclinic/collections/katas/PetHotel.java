@@ -19,13 +19,23 @@ public class PetHotel {
     }
 
     public void feedTheGuests() {
-        for (Pet pet : getPets()) {
-            if (pet.getBreed() == Breed.Cat) {
-                pet.feed(10 * pet.getWeightInKilos(), PetFood.KittyKat);
-            } else if (pet.getBreed() == Breed.Dog) {
-                pet.feed(20 * pet.getWeightInKilos(), PetFood.FidosFood);
-            }
+        getPets().forEach(this::feed);
+    }
+
+    private void feed(Pet pet) {
+        if (pet.getBreed() == Breed.Cat) {
+            feedCat(pet);
+        } else if (pet.getBreed() == Breed.Dog) {
+            feedDog(pet);
         }
+    }
+
+    private void feedDog(Pet pet) {
+        pet.feed(20 * pet.getWeightInKilos(), PetFood.FidosFood);
+    }
+
+    private void feedCat(Pet pet) {
+        pet.feed(10 * pet.getWeightInKilos(), PetFood.KittyKat);
     }
 
     private enum HotelAvailability {Available, Full}
