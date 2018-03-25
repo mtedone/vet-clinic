@@ -1,7 +1,7 @@
 package serenitylabs.tutorials.vetclinic.collections.katas;
 
-import serenitylabs.tutorials.vetclinic.Breed;
 import serenitylabs.tutorials.vetclinic.Pet;
+import serenitylabs.tutorials.vetclinic.models.FoodDispenser;
 
 import java.util.*;
 
@@ -14,29 +14,19 @@ public class PetHotel {
     private Collection<Pet> pets = new TreeSet<>(comparing(Pet::getName));
     private Queue<Pet> waitingList = new LinkedList<>();
 
+    FoodDispenser foodDispenser = new FoodDispenser();
+
     public List<Pet> getPets() {
         return new ArrayList<>(pets);
     }
 
     public void feedTheGuests() {
-        getPets().forEach(this::feed);
+        getPets().forEach(
+                pet -> pet.eat(foodDispenser.prepareMealForPet(pet))
+        );
     }
 
-    private void feed(Pet pet) {
-        if (pet.getBreed() == Breed.Cat) {
-            feedCat(pet);
-        } else if (pet.getBreed() == Breed.Dog) {
-            feedDog(pet);
-        }
-    }
 
-    private void feedDog(Pet pet) {
-        pet.feed(20 * pet.getWeightInKilos(), PetFood.FidosFood);
-    }
-
-    private void feedCat(Pet pet) {
-        pet.feed(10 * pet.getWeightInKilos(), PetFood.KittyKat);
-    }
 
     private enum HotelAvailability {Available, Full}
 
