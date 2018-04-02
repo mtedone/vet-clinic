@@ -46,6 +46,11 @@ public class Cat extends Animal {
         return COMPLAINT;
     }
 
+    @Override
+    public String getComplaint() {
+        return COMPLAINT;
+    }
+
     public static class CatBuilder {
         private final String name;
         private String breed;
