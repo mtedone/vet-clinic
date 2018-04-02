@@ -3,15 +3,17 @@ package serenitylabs.tutorials.vetclinic.domain;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dog extends Animal {
+public class Dog extends Animal implements NeedsVaccination {
 
     public static final String COMPLAINT = "Grrrr";
     private final String name;
     private final String breed;
     private final List<String> colour;
+    private LocalDate lastVaccinationDate;
 
     public Dog(String name, String breed, List<String> colour) {
 
@@ -49,6 +51,16 @@ public class Dog extends Animal {
     @Override
     public String getComplaint() {
         return COMPLAINT;
+    }
+
+    @Override
+    public void wasVaccinated(LocalDate lastVaccinationDate) {
+        this.lastVaccinationDate = lastVaccinationDate;
+    }
+
+    @Override
+    public LocalDate nextVaccinationDue() {
+        return lastVaccinationDate.plusMonths(6);
     }
 
     public static class DogBuilder {
