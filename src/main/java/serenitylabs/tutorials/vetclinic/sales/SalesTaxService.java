@@ -18,18 +18,25 @@ public class SalesTaxService {
                 .forAnAmountOf(NumberUtils.round(item.getTotal() * applicableTaxRate.getRate(), 2));
     }
 
+    static TaxRateCalculator STANDARD_RATE = (item) -> new TaxRate(0.23, "Standard");
+    static TaxRateCalculator ZERO_RATE = (item) -> new TaxRate(0.00, "Zero");
+    static TaxRateCalculator REDUCED_RATE = (item) -> {
+        double rate =  (item.getTotal() > 100) ? 0.135 : 0.09;
+        return new TaxRate(rate, "Reduced");
+    };
+
     private static Map<ProductCategory, TaxRateCalculator> taxRateCalculatorMap = new HashMap<>();
 
     static {
-        taxRateCalculatorMap.put(ProductCategory.Snacks, new ReducedRateCalculator());
-        taxRateCalculatorMap.put(ProductCategory.Books, new ZeroRateCalculator());
-        taxRateCalculatorMap.put(ProductCategory.Medicine, new ZeroRateCalculator());
-        taxRateCalculatorMap.put(ProductCategory.SoftDrinks, new ReducedRateCalculator());
+        taxRateCalculatorMap.put(ProductCategory.Snacks, REDUCED_RATE);
+        taxRateCalculatorMap.put(ProductCategory.Books, ZERO_RATE);
+        taxRateCalculatorMap.put(ProductCategory.Medicine, ZERO_RATE);
+        taxRateCalculatorMap.put(ProductCategory.SoftDrinks, REDUCED_RATE);
 
     }
 
     private TaxRate taxRateFor(LineItem item) {
-        return taxRateCalculatorMap.getOrDefault(item.getCategory(), new StandardRateCalculator())
-                .rateFor(item);
+        return taxRateCalculatorMap.getOrDefault(item.getCategory(), STANDARD_RATE)
+                .apply(item);
     }
 }
