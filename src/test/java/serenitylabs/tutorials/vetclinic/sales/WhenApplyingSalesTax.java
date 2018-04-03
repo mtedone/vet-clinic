@@ -12,7 +12,7 @@ import java.util.Collection;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static serenitylabs.tutorials.vetclinic.sales.model.ProductCategory.Snacks;
+import static serenitylabs.tutorials.vetclinic.sales.model.ProductCategory.*;
 
 @RunWith(Parameterized.class)
 public class WhenApplyingSalesTax {
@@ -43,7 +43,10 @@ public class WhenApplyingSalesTax {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
                 {1, "crisps", Snacks, 3.00, 0.09, "Reduced", 0.27},
-                {50, "crisps", Snacks, 3.00, 0.135, "Reduced", 20.25}
+                {50, "crisps", Snacks, 3.00, 0.135, "Reduced", 20.25},
+                {1, "training dogs", Books, 5.00, 0.00, "Zero", 0.00},
+                {1, "pills", Medicine, 5.00, 0.00, "Zero", 0.00},
+                {1, "rubber bone", Toys, 10.00, 0.23, "Standard", 2.30}
 
         });
     }
