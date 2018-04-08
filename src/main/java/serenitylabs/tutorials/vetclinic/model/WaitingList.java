@@ -24,4 +24,11 @@ public class WaitingList {
     public Collection<Pet> getPets() {
         return ImmutableList.copyOf(waitingList);
     }
+
+    @Override
+    public String toString() {
+        return "WaitingList{" +
+                "waitingList=" + waitingList +
+                '}';
+    }
 }

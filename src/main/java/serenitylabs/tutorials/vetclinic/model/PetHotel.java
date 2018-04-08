@@ -63,4 +63,12 @@ public class PetHotel {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PetHotel{" +
+                "hotelName='" + hotelName + '\'' +
+                ", guestList=" + guestList +
+                ", waitingList=" + waitingList +
+                '}';
+    }
 }

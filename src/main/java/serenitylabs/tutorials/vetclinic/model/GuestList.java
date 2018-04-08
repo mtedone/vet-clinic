@@ -26,4 +26,11 @@ public class GuestList {
     public boolean remove(Pet pet) {
         return pets.remove(pet);
     }
+
+    @Override
+    public String toString() {
+        return "GuestList{" +
+                "pets=" + pets +
+                '}';
+    }
 }
